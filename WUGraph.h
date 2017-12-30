@@ -1,21 +1,23 @@
 #pragma 
 #include<iostream>
+#include"HashTable.h"
 using namespace std;
 const int maxWeight = INT_MAX;
 const int DefaultSize = 100;
 const int MaxVertices = 10000;
-enum KindOfStatus { Active, Empty, Deleted };
+//enum KindOfStatus { Active, Empty, Deleted };
 const int DeafultVertices = 30;			//代表最大顶点数 =n
 struct Vertex
 {
 	int key;
-	int data;
+	int code;//序号
+	int value;//实际值
 	Edge *adj;
 	Vertex *rLink,*lLink;
 };
 struct  Edge
 {
-	int dest;            //边的另一个顶点位置
+	int dest;            //边的另一个顶点位置这个是在数组中的序号
 	int cost;              //边上的权值
 	int key;             //边的关键码
 	Edge  *lLink,*rLink;   //下一条边链指针
@@ -54,7 +56,6 @@ public:
 		return -1;
 	}
 	void kruskal(int v);
-	
 private:
 	Verhash  NodeHashtable;
 	Edghash  EdgeHashtable;
@@ -64,4 +65,5 @@ private:
 	int numEdges;
 	int numVertices;
 };
+
 
