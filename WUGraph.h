@@ -1,25 +1,27 @@
 #pragma 
 #include<iostream>
+#include"HashTable.h"
 using namespace std;
 const int maxWeight = INT_MAX;
 const int DefaultSize = 100;
 const int MaxVertices = 10000;
-enum KindOfStatus { Active, Empty, Deleted };
-const int DeafultVertices = 30;			//´ú±í×î´ó¶¥µãÊý =n
+//enum KindOfStatus { Active, Empty, Deleted };
+const int DeafultVertices = 30;			//ä»£è¡¨æœ€å¤§é¡¶ç‚¹æ•° =n
 struct Vertex
 {
 	int key;
-	int data;
+	int code;//åºå·
+	int value;//å®žé™…å€¼
 	Edge *adj;
 	Vertex *rLink,*lLink;
 };
 struct  Edge
 {
-	int dest;            //±ßµÄÁíÒ»¸ö¶¥µãÎ»ÖÃ
-	int cost;              //±ßÉÏµÄÈ¨Öµ
-	int key;             //±ßµÄ¹Ø¼üÂë
-	Edge  *lLink,*rLink;   //ÏÂÒ»Ìõ±ßÁ´Ö¸Õë
-	Edge * partner;//»ï°éÖ¸Õë
+	int dest;            //è¾¹çš„å¦ä¸€ä¸ªé¡¶ç‚¹ä½ç½®è¿™ä¸ªæ˜¯åœ¨æ•°ç»„ä¸­çš„åºå·
+	int cost;              //è¾¹ä¸Šçš„æƒå€¼
+	int key;             //è¾¹çš„å…³é”®ç 
+	Edge  *lLink,*rLink;   //ä¸‹ä¸€æ¡è¾¹é“¾æŒ‡é’ˆ
+	Edge * partner;//ä¼™ä¼´æŒ‡é’ˆ
 	Edge() { cost = maxWeight; }
 	Edge(int num, int weight) : dest(num), cost(weight), Rlink(NULL), Llink(NULL) {}
 	bool operator != (Edge& R)const
@@ -33,11 +35,11 @@ class Graphlnk
 public:
 	Graphlnk(int sz = MaxVertices);
 	~Graphlnk();
-	int getValue(int i)					//È¡Î»ÖÃÎªiµÄ¶¥µãÖÐµÄÖµ
+	int getValue(int i)					//å–ä½ç½®ä¸ºiçš„é¡¶ç‚¹ä¸­çš„å€¼
 	{
 		return (i >= 0 && i< numVertices) ? NodeTable[i].nameRouter : 0;
 	}
-	int getWeight(int v1, int v2);			//·µ»Ø±ß(v1,v2)µÄÈ¨Öµ
+	int getWeight(int v1, int v2);			//è¿”å›žè¾¹(v1,v2)çš„æƒå€¼
 	bool insertVertex(const Vertex vertex);     
 	bool removeVertex(int v);
 	bool insertEdge(int v1, int v2, const Edge edge);
@@ -54,7 +56,6 @@ public:
 		return -1;
 	}
 	void kruskal(int v);
-	
 private:
 	Verhash  NodeHashtable;
 	Edghash  EdgeHashtable;
@@ -64,4 +65,5 @@ private:
 	int numEdges;
 	int numVertices;
 };
+
 
