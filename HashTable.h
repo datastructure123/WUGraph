@@ -12,34 +12,33 @@ struct EdgNode
 	Edge data;
 	EdgNode *link;
 };
-class hash
+class Hash
 {
 public:
-	hash(int d,int sz);
-	~hash();
-	virtual bool Search(int num);//传入结点的序号
-	virtual bool Insert();
-	virtual bool Remove(int num);
-	virtual int key(const int num);
-private:
+	Hash();
+	~Hash() {};
+    bool Search(int num);//传入结点的序号
+    bool Remove(int num);
+    int key(const int num);
+protected:
 	int divisor;
 	int TableSize;
 };
-class Verhash:public hash
+class Verhash:public Hash
 {
 public:
-	Verhash();
-    ~Verhash();
+	Verhash(int d,int sz);
+	~Verhash() { delete[]ht; };
 	bool Insert(Vertex vertex);
 private:
 	VerNode**ht;
 	VerNode*FindPos(int num);
 };
-class Edghash:public hash
+class Edghash:public Hash
 {
 public:
-	Edghash();
-    ~Edghash();
+	Edghash(int d,int sz);
+    ~Edghash() { delete[]ht; };
 	bool Insert(Edge edge);
 private:
 	EdgNode**ht;
