@@ -1,16 +1,16 @@
 #pragma once
 #include"WUGraph.h"
-//numÊÇĞòºÅ
+//numæ˜¯åºå·
 //
-struct VerNode//¹şÏ£±íÖĞµÄµã½áµãÀà
+struct VerNode//å“ˆå¸Œè¡¨ä¸­çš„ç‚¹ç»“ç‚¹ç±»
 {
 	Vertex* data;
 	VerNode *link;
 };
-struct EdgNode//¹şÏ£±íÖĞµÄ±ß½áµãÀà
+struct EdgNode//å“ˆå¸Œè¡¨ä¸­çš„è¾¹ç»“ç‚¹ç±»
 {
 	Edge* data;
-	int head;//±ßµÄÆğµã
+	int head;//è¾¹çš„èµ·ç‚¹
 	EdgNode *link;
 };
 class Hash
@@ -18,16 +18,15 @@ class Hash
 public:
 	Hash();
 	~Hash() {};
-    bool Search(int num);//´«Èë½áµãµÄĞòºÅ
+    bool Search(int num);//ä¼ å…¥ç»“ç‚¹çš„åºå·
     bool Remove(int num);
 protected:
 	int key;
 	int divisor;
 	int TableSize;
-	//KindOfStatus* info = new KindOfStatus[TableSize];¿ªÉ¢ÁĞÀï²»ÓÃÕâ¸ö¹¦ÄÜ
-
+	//KindOfStatus* info = new KindOfStatus[TableSize];å¼€æ•£åˆ—é‡Œä¸ç”¨è¿™ä¸ªåŠŸèƒ½
 };
-class Verhash:public Hash//µãµÄ¹şÏ£±í
+class Verhash:public Hash//ç‚¹çš„å“ˆå¸Œè¡¨
 {
 public:
 	Verhash(int d,int sz);
@@ -37,7 +36,7 @@ private:
 	VerNode**ht;
 	VerNode*FindPos(const int num);
 };
-class Edghash:public Hash//±ßµÄ¹şÏ£±í
+class Edghash:public Hash//è¾¹çš„å“ˆå¸Œè¡¨
 {
 public:
 	Edghash(int d,int sz);

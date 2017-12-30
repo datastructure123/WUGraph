@@ -1,3 +1,4 @@
+
 #pragma once
 #include"HashTable.h"
 #include"WUGraph.h"
@@ -31,7 +32,7 @@ VerNode* Verhash::FindPos(const int num)
 	}
 	return p;
 }
-EdgNode* Edghash::FindPos(const int u, const int v)//ÕâÀïµÄu£¬vÊÇÊµ¼ÊµÄĞòºÅ
+EdgNode* Edghash::FindPos(const int u, const int v)//ï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½vï¿½ï¿½Êµï¿½Êµï¿½ï¿½ï¿½ï¿½
 {
 	int HashValue=u+v;
 	HashValue %= divisor;
@@ -41,4 +42,5 @@ EdgNode* Edghash::FindPos(const int u, const int v)//ÕâÀïµÄu£¬vÊÇÊµ¼ÊµÄĞòºÅ
 		p = p->link;
 	}
 	return p;
+
 }
