@@ -14,6 +14,7 @@ struct Vertex
 	int key;
 	int code;//序号
 	int value;//实际值
+	int degree;//点的度数
 	Edge *adj;
 	Vertex *rLink,*lLink;
 };
