@@ -2,12 +2,12 @@
 #include"WUGraph.h"
 //num是序号
 //
-struct VerNode
+struct VerNode//哈希表中的点结点类
 {
 	Vertex data;
 	VerNode *link;
 };
-struct EdgNode
+struct EdgNode//哈希表中的边结点类
 {
 	Edge data;
 	EdgNode *link;
@@ -24,7 +24,7 @@ protected:
 	int divisor;
 	int TableSize;
 };
-class Verhash:public Hash
+class Verhash:public Hash//点的哈希表
 {
 public:
 	Verhash(int d,int sz);
@@ -34,7 +34,7 @@ private:
 	VerNode**ht;
 	VerNode*FindPos(int num);
 };
-class Edghash:public Hash
+class Edghash:public Hash//边的哈希表
 {
 public:
 	Edghash(int d,int sz);

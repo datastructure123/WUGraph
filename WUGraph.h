@@ -56,8 +56,8 @@ public:
 	void kruskal(int v);
 	
 private:
-	VertexHashTable  NodeHashtable;
-	EdgeHashTable  EdgeHashtable;
+	Verhash  NodeHashtable;
+	Edghash  EdgeHashtable;
 	VertexDblList NodeTable;
 	EdgeDblList EdgeTable;
 	int maxVertices;
