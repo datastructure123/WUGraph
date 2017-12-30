@@ -12,20 +12,19 @@ struct EdgNode
 	Edge data;
 	EdgNode *link;
 };
-class hash
+class Hash
 {
 public:
-	hash(int d,int sz);
-	~hash();
-	virtual bool Search(int num);//传入结点的序号
-	virtual bool Insert();
-	virtual bool Remove(int num);
-	virtual int key(const int num);
+	Hash(int d,int sz);
+	~Hash();
+    bool Search(int num);//传入结点的序号
+    bool Remove(int num);
+    int key(const int num);
 private:
 	int divisor;
 	int TableSize;
 };
-class Verhash:public hash
+class Verhash:public Hash
 {
 public:
 	Verhash();
@@ -35,7 +34,7 @@ private:
 	VerNode**ht;
 	VerNode*FindPos(int num);
 };
-class Edghash:public hash
+class Edghash:public Hash
 {
 public:
 	Edghash();

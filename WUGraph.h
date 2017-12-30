@@ -1,5 +1,6 @@
 #pragma 
 #include<iostream>
+#include"HashTable.h"
 using namespace std;
 const int maxWeight = INT_MAX;
 const int DefaultSize = 100;
@@ -56,8 +57,8 @@ public:
 	void kruskal(int v);
 	
 private:
-	HashTable  NodeHashtable;
-	HashTable  EdgeHashtable;
+	Verhash  NodeHashtable;
+	Edghash  EdgeHashtable;
 	VertexDblList NodeTable;
 	EdgeDblList EdgeTable;
 	int maxVertices;
