@@ -6,6 +6,7 @@ EdgeDblList::~EdgeDblList()
 
 Edge * EdgeDblList::Search(const int & x, int d)
 {
+	int i = x;
 	if (i<0) return NULL;
 	if (first->rLink == first || i == 0) return first;//空双向循环链表或i为0
 	Edge *current;//遍历指针

@@ -1,5 +1,5 @@
 #pragma once
-#include"WUGraph.h"
+#include"Vertex.h"
 class VertexDblList { //双向循环链表类定义
 public:
 	VertexDblList() { //构造函数
