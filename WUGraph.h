@@ -1,9 +1,9 @@
 #pragma 
-const int maxWeight = INT_MAX;
+const int maxWeight = 0xfffffff;
 const int DefaultSize = 100;
 enum KindOfStatus { Active, Empty, Deleted };
 const int DeafultVertices = 30;			//代表最大顶点数 =n
-template<class T,class E>
+//template<class T,class E>
 struct Vertex
 {
 	int key;
@@ -11,7 +11,7 @@ struct Vertex
 	Edge<T, E> *adj;
 	Vertex<T, E> *prior,*next;
 };
-template<class T, class E>
+//template<class T, class E>
 struct  Edge
 {
 	int dest;            //边的另一个顶点位置
@@ -24,7 +24,6 @@ struct  Edge
 	{
 		return (dest != R.dest) ? true : false;
 	}
-
 };
 template<class T, class E>
 class Graphlnk
