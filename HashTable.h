@@ -26,7 +26,7 @@ protected:
 	int TableSize;
 	//KindOfStatus* info = new KindOfStatus[TableSize];开散列里没什么卵用
 };
-class Verhash:public Hash//鐐圭殑鍝堝笇琛?
+class Verhash:public Hash//点的哈希表
 {
 public:
 	Verhash(int d,int sz);
@@ -36,7 +36,7 @@ private:
 	VerNode**ht;
 	VerNode*FindPos(const int num);
 };
-class Edghash:public Hash//杈圭殑鍝堝笇琛?
+class Edghash:public Hash//边的哈希表
 {
 public:
 	Edghash(int d,int sz);
