@@ -1,16 +1,16 @@
 #pragma once
 #include"Vertex.h"
-//num鏄簭鍙?
+//num是序号
 //
-struct VerNode//鍝堝笇琛ㄤ腑鐨勭偣缁撶偣绫?
+struct VerNode//点的哈希表结点
 {
 	Vertex* data;
 	VerNode *link;
 };
-struct EdgNode//鍝堝笇琛ㄤ腑鐨勮竟缁撶偣绫?
+struct EdgNode//边的哈希表结点
 {
 	Edge* data;
-	int head;//杈圭殑璧风偣
+	int head;//边的起点
 	EdgNode *link;
 };
 class Hash
@@ -18,13 +18,13 @@ class Hash
 public:
 	Hash();
 	~Hash() {};
-    bool Search(int num);//浼犲叆缁撶偣鐨勫簭鍙?
+    bool Search(int num);//查找
     bool Remove(int num);
 protected:
 	int key;
 	int divisor;
 	int TableSize;
-	//KindOfStatus* info = new KindOfStatus[TableSize];寮�鏁ｅ垪閲屼笉鐢ㄨ繖涓姛鑳?
+	//KindOfStatus* info = new KindOfStatus[TableSize];开散列里没什么卵用
 };
 class Verhash:public Hash//鐐圭殑鍝堝笇琛?
 {
