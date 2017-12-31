@@ -72,8 +72,33 @@ int Graphlnk::weight()
 	//用哈希表遍历边
 	return 0;
 }
+void Graphlnk::sort_edge(bool cmp_(const Edge&, const Edge&))
+{
 
+}
+bool comp(const Edge& a, const Edge& b)
+{
+	return a.cost < b.cost;
+}
 void Graphlnk::kruskal(int v)
 {
 	//克鲁斯卡算法
+	bool *vis = new bool[numVertices];
+	sort_edge(comp);
+	int result{ 0 };
+	for (int i = 0; i < numEdges; i++)
+	{
+		Edge e{ edg_sort[i] };
+		if (vis[e.dest] == false || vis[e.head] == false)
+		{
+			result += e.cost;
+			vis[e.dest] = true;
+			vis[e.head] = true;
+		}
+	}
+
+	delete[] vis;
+
+	return result;
+
 }

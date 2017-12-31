@@ -14,6 +14,10 @@ class Graphlnk
 public:
 	Graphlnk(int sz = MaxVertices);
 	~Graphlnk();
+	bool comp(const Edge& a, const Edge& b)
+	{
+		return a.cost < b.cost;
+	}
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
 	Vertex * getVertices();  //返回包含所有顶点的数组
@@ -29,6 +33,9 @@ public:
 	int weight();                        //求某边的权值
 	void kruskal(int v);                 //克鲁斯卡算法
 private:
+	void sort_edge(bool cmp_(const Edge&, const Edge&));
+	//并查集所需
+	Edge *edg_sort;   //存储排好序的边
 	Verhash  NodeHashtable{ maxVertices,maxVertices };
 	Edghash  EdgeHashtable{maxVertices,maxVertices};
 	VertexDblList NodeTable;
