@@ -1,7 +1,5 @@
 #pragma once
 #include"Vertex.h"
-//num是序号
-//
 struct VerNode//点的哈希表结点
 {
 	Vertex* data;
@@ -18,7 +16,7 @@ class Hash
 public:
 	Hash();
 	~Hash() {};
-    bool Search(int num);//查找
+    virtual bool Search(int num);//查找
     bool Remove(int num);
 protected:
 	int key;
@@ -34,14 +32,15 @@ public:
 	bool Insert(Vertex vertex);
 private:
 	VerNode**ht;
-	VerNode*FindPos(const int num);
+	VerNode*FindPos(const int num);//这里的num就是真实的点的号
 };
 class Edghash:public Hash//边的哈希表
 {
 public:
 	Edghash(int d,int sz);
     ~Edghash() { delete[]ht; };
-	bool Insert(Edge edge);
+	bool Search(const int u, const int v);
+	bool Insert(Edge edge, int head);//不仅要把边指针传进来，也要把边的另一半传进来
 private:
 	EdgNode**ht;
 	EdgNode*FindPos(const int u,const int v);

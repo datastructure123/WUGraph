@@ -1,6 +1,7 @@
 #pragma once
 #include"HashTable.h"
 #include<assert.h>
+//FindPos是插入时使用的函数，可是我们search要返回什么呢？
 Hash::Hash()
 {
 	divisor = 0;
@@ -40,5 +41,8 @@ EdgNode* Edghash::FindPos(const int u, const int v)//这里的U v是序号
 		p = p->link;
 	}
 	return p;
-
+}
+VerNode* Verhash::FindPos(const int num)
+{
+	
 }
