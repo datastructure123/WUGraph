@@ -3,9 +3,10 @@
 const int maxWeight = 0xfffffff;
 struct  Edge
 {
-	int dest;            //边的另一个顶点位置这个是在数组中的序号
+	int dest;            //边的另一个顶点的真实code
 	int cost;              //边上的权值
-	int key;             //边的关键码
+	int key;     //边的关键码
+	int head;//存终点
 	Edge  *lLink, *rLink;   //下一条边链指针
 	Edge * partner;//伙伴指针
 	Edge() { cost = maxWeight; }

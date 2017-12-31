@@ -2,16 +2,16 @@
 #include"Vertex.h"
 struct VerNode//点的哈希表结点
 {
-	Vertex* data;
-	VerNode *link;
-	VerNode* last;//指向前一个结点；
+	Vertex* data=nullptr;
+	VerNode *link=nullptr;
+	VerNode* last=nullptr;//指向前一个结点；
 };
 struct EdgNode//边的哈希表结点
 {
-	Edge* data;
+	Edge* data=nullptr;
 	int head;//边的起点
-	EdgNode *link;
-	EdgNode *last;
+	EdgNode *link=nullptr;
+	EdgNode *last=nullptr;
 };
 class Hash
 {
@@ -33,7 +33,7 @@ public:
 	~Verhash() { delete[]ht; };
 	bool Remove(const int num);
 	bool Search(const int num);
-	//bool Insert(Vertex vertex);
+	bool Insert(Vertex vertex);
 private:
 	VerNode**ht;
 	VerNode*FindPos(const int num);
@@ -45,9 +45,9 @@ public:
 	Edghash() {}
 	Edghash(int d,int sz);
     ~Edghash() { delete[]ht; };
-	bool Remove(const int num);
+	bool Remove(const int u,const int v);
 	bool Search(const int u, const int v);
-	bool Insert(Edge edge, int head);//不仅要把边指针传进来，也要把边的另一半传进来
+	bool Insert(Edge edge);//不仅要把边指针传进来，也要把边的另一半传进来
 private:
 	EdgNode**ht;
 	EdgNode*FindPos(const int u,const int v);
