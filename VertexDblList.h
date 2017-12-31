@@ -1,5 +1,6 @@
 #pragma once
 #include"Vertex.h"
+using namespace std;
 class VertexDblList { //双向循环链表类定义
 public:
 	VertexDblList() { //构造函数
@@ -11,9 +12,9 @@ public:
 	Vertex *getHead() const { return first; }
 	void setHead(Vertex *ptr) { first = ptr; }
 	Vertex *Search(const int& x, int d);
-	
-	bool Insert(int i, const int& x, int d);
-	bool Remove(int i, int& x, int d); //删除第i个结点
+	Vertex *Locate(int i, int d);
+	bool Insert(int i, Vertex * x, int d);
+	bool Remove(int i, Vertex * x, int d); //删除第i个结点
 	bool IsEmpty() { return first->rLink == first; }
 	//判双链表空否
 private:

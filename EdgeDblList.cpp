@@ -22,12 +22,13 @@ Edge * EdgeDblList::Search(const int & x, int d)
 
 bool EdgeDblList::Insert(int i, const int & x, int d)
 {
-	Edge * current = Search();
-	Edge *newNode = new Edge(num,x);
+	Edge * current = Search(x,d);
+	Edge *newNode = new Edge(x,d);
 	newNode->lLink = current->lLink;
 	current->lLink = newNode;
-	newNode->lLink->rlink = newNode;
+	newNode->lLink->rLink = newNode;
 	newNode->rLink = current;
+	return true;
 }
 
 bool EdgeDblList::Remove(int i, int & x, int d)

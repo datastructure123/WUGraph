@@ -1,5 +1,9 @@
 #include "WUGraph.h"
 
+Graphlnk::Graphlnk(int sz)
+{
+	maxVertices = sz;
+}
 int Graphlnk::vertexCount()
 {   
 	return numVertices;
@@ -28,11 +32,13 @@ void Graphlnk::removeVertex()
 int Graphlnk::isVertex()
 {
 	//从哈希表里遍历顶点
+	return 0;
 }
 
 int Graphlnk::degree(int v)
 {
 	//从邻接表找到边的个数
+	return 0;
 }
 
 int Graphlnk::getFirstNeighbor(int v1, int v2)
@@ -58,11 +64,13 @@ void Graphlnk::removeEdge(int v1, int v2)
 int Graphlnk::isEdge()
 {
 	//用哈希表直接遍历边
+	return 0;
 }
 
 int Graphlnk::weight()
 {
 	//用哈希表遍历边
+	return 0;
 }
 
 void Graphlnk::kruskal(int v)

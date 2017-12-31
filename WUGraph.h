@@ -29,8 +29,8 @@ public:
 	int weight();                        //求某边的权值
 	void kruskal(int v);                 //克鲁斯卡算法
 private:
-	Verhash  NodeHashtable;
-	Edghash  EdgeHashtable;
+	Verhash  NodeHashtable{ maxVertices,maxVertices };
+	Edghash  EdgeHashtable{maxVertices,maxVertices};
 	VertexDblList NodeTable;
 	EdgeDblList EdgeTable;
 	int maxVertices;
