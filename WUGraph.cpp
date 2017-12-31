@@ -98,7 +98,7 @@ void Graphlnk::kruskal(int v)
 	}
 
 	delete[] vis;
-
-	return result;
+	//接着调用输出函数
+	//result是最小值
 
 }
