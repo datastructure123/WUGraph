@@ -34,7 +34,7 @@ private:
 	Edge *edg_sort;   //存储排好序的边
 	Verhash  NodeHashtable{ maxVertices,maxVertices };
 	Edghash  EdgeHashtable{maxVertices,maxVertices};
-	VertexDblList NodeTable;
+	//VertexDblList NodeTable;
 	Vertex *real;
 	Vertex *first;
 	int maxVertices;

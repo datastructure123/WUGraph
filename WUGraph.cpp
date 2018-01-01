@@ -184,6 +184,7 @@ void Graphlnk::sort_edge(bool cmp_(const Edge&, const Edge&))
 			else
 			{
 				Edge* temp = edg_sort->rLink,*m;
+				m = temp;
 				while (temp!=nullptr)
 				{
 					m = temp;
