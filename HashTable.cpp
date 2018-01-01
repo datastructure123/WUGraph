@@ -65,14 +65,14 @@ bool Verhash::Search(const int num)
 	else
 		return false;
 }
-bool Verhash::Insert(Vertex vertex)
+bool Verhash::Insert(Vertex* vertex)
 {
 	VerNode*p,*q;
-	p = FindPos(vertex.code);
+	p = FindPos(vertex->code);
 	q = p;
 	if (p != NULL&&p->link == NULL)
 	{
-		p->link->data = &vertex;
+		p->link->data = vertex;
 		p->link->last = q;
 	}
 	else if(p!=NULL&&p->link!=NULL)
@@ -81,10 +81,10 @@ bool Verhash::Insert(Vertex vertex)
 	}
 	else//p±¾ÉíÊÇnullµÄÇé¿ö
 	{
-		p->data = &vertex;
+		p->data = vertex;
 		p->link = q;
 	}
-	vertex.key = vertex.code%divisor;
+	vertex->key = vertex->code%divisor;
 	return true;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -112,14 +112,14 @@ EdgNode* Edghash::FindPos(const int u, const int v)//ÕâÀïµÄU vÊÇÐòºÅ
 	}
 	return p;
 }
-bool Edghash::Insert(Edge edge)//Õâ¸öheadÒ²ÊÇÐòºÅ£¿ÎÒÃÇÕâ¸öÌâÄ¿ÖÐÃ²ËÆ²»ÐèÒªÐòºÅ°É£¬·´Õý·ÃÎÊµÄÊ±ºò£¬Ò²ÊÇÍ¨¹ýhash±íÀ´µÄÑ¾
+bool Edghash::Insert(Edge* edge)//Õâ¸öheadÒ²ÊÇÐòºÅ£¿ÎÒÃÇÕâ¸öÌâÄ¿ÖÐÃ²ËÆ²»ÐèÒªÐòºÅ°É£¬·´Õý·ÃÎÊµÄÊ±ºò£¬Ò²ÊÇÍ¨¹ýhash±íÀ´µÄÑ¾
 {
 	EdgNode*p, *q;
-	p = FindPos(edge.head,edge.dest);
+	p = FindPos(edge->head,edge->dest);
 	q = p;
 	if (p != NULL&&p->link == NULL)
 	{
-		p->link->data = &edge;
+		p->link->data = edge;
 		p->link->last = q;
 	}
 	else if (p != NULL&&p->link != NULL)
@@ -128,10 +128,10 @@ bool Edghash::Insert(Edge edge)//Õâ¸öheadÒ²ÊÇÐòºÅ£¿ÎÒÃÇÕâ¸öÌâÄ¿ÖÐÃ²ËÆ²»ÐèÒªÐòºÅ°
 	}
 	else//p±¾ÉíÊÇnullµÄÇé¿ö
 	{
-		p->data = &edge;
+		p->data = edge;
 		p->link = q;
 	}
-	edge.key = (edge.head+edge.dest)%divisor;
+	edge->key = (edge->head+edge->dest)%divisor;
 	return true;
 }
 bool Edghash::Search(int u, int v)

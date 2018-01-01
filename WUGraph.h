@@ -17,7 +17,7 @@ public:
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
 	Vertex * getVertices();  //返回包含所有顶点的数组
-	void addVertex();        //添加顶点
+	void addVertex(Vertex *x);        //添加顶点
 	void removeVertex();     //删除顶点
 	int isVertex();          //判断该顶点是否在图中
 	int degree(int v);       //顶点的度
@@ -35,7 +35,6 @@ private:
 	Verhash  NodeHashtable{ maxVertices,maxVertices };
 	Edghash  EdgeHashtable{maxVertices,maxVertices};
 	VertexDblList NodeTable;
-	EdgeDblList EdgeTable;
 	int maxVertices;
 	int numEdges;
 	int numVertices;

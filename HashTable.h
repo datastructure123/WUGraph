@@ -33,7 +33,7 @@ public:
 	~Verhash() { delete[]ht; };
 	bool Remove(const int num);
 	bool Search(const int num);
-	bool Insert(Vertex vertex);
+	bool Insert(Vertex* vertex);
 private:
 	VerNode**ht;
 	VerNode*FindPos(const int num);
@@ -47,7 +47,7 @@ public:
     ~Edghash() { delete[]ht; };
 	bool Remove(const int u,const int v);
 	bool Search(const int u, const int v);
-	bool Insert(Edge edge);//不仅要把边指针传进来，也要把边的另一半传进来
+	bool Insert(Edge* edge);//不仅要把边指针传进来，也要把边的另一半传进来
 private:
 	EdgNode**ht;
 	EdgNode*FindPos(const int u,const int v);

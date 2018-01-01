@@ -19,13 +19,17 @@ Vertex * Graphlnk::getVertices()
 	return nullptr;
 }
 
-void Graphlnk::addVertex()
+void Graphlnk::addVertex(Vertex *x)
 {
 	//先创建一个点，然后调用哈希表和双向链表的插入函数，顶点数+1
+	NodeHashtable.Insert(x);
+	NodeTable.Insert(numVertices, x, 1);
+	numVertices++;
 }
 
 void Graphlnk::removeVertex()
 {
+
 	//删除哈希表里的和双向链表里的
 }
 
@@ -101,4 +105,4 @@ void Graphlnk::kruskal(int v)
 	//接着调用输出函数
 	//result是最小值
 
-}
+}                                                                                                                                                                                                     
