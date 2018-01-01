@@ -16,14 +16,14 @@ public:
 	~Graphlnk();
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
-	Vertex * getVertices();  //返回包含所有顶点的数组
+	void getVertices();  //返回包含所有顶点的数组
 	void addVertex(Vertex *x);        //添加顶点
 	void removeVertex();     //删除顶点
 	int isVertex();          //判断该顶点是否在图中
 	int degree(int v);       //顶点的度
-	int getFirstNeighbor(int v1, int v2);//返回第一个邻接顶点
+	int getFirstNeighbor(int v);//返回第一个邻接顶点
 	int getNextNeighbor(int v1, int v2); //返回下一个邻接顶点
-	void addEdge(int v1, int v2);        //添加边
+	void addEdge(Edge* edge);        //添加边
 	void removeEdge(int v1, int v2);     //删除边
 	int isEdge();                        //判断是否为边
 	int weight();                        //求某边的权值
@@ -35,6 +35,8 @@ private:
 	Verhash  NodeHashtable{ maxVertices,maxVertices };
 	Edghash  EdgeHashtable{maxVertices,maxVertices};
 	VertexDblList NodeTable;
+	Vertex *real;
+	Vertex *first;
 	int maxVertices;
 	int numEdges;
 	int numVertices;

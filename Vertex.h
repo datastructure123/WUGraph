@@ -7,7 +7,7 @@ struct  Edge
 	int cost;              //边上的权值
 	int key;     //边的关键码
 	int head;//存终点
-	Edge  *lLink, *rLink;   //下一条边链指针
+	Edge  *lLink=nullptr, *rLink=nullptr;   //下一条边链指针
 	Edge * partner;//伙伴指针
 	Edge() { cost = maxWeight; }
 	Edge(int num, int weight) : dest(num), cost(weight), lLink(nullptr), rLink(nullptr) {};
@@ -19,9 +19,8 @@ struct  Edge
 struct Vertex
 {
 	int key;
-	int code;//序号
-	int value;//实际值
+	int code;//点的实际值
 	int degree;//点的度数
-	Edge *adj;
-	Vertex *rLink, *lLink;
+	Edge *adj=new Edge;
+	Vertex *rLink=nullptr, *lLink=nullptr;
 };

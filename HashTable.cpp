@@ -49,12 +49,16 @@ VerNode* Verhash::FindPos(const int num)
 	int HashValue = num%divisor;
 	VerNode*p = ht[HashValue],*q=p;
 	//修改一下找位置，使得最终返回本结点的前一个结点
-	while (p != NULL&&p->data->value != num)
+	while (p != NULL&&p->data->code!= num)
 	{
 		q = p;
 		p = p->link;
 	}
 	return q;
+}
+Vertex* Verhash::Find(const int num)
+{
+	return (FindPos(num)->data);
 }
 bool Verhash::Search(const int num)
 {
@@ -105,12 +109,16 @@ EdgNode* Edghash::FindPos(const int u, const int v)//这里的U v是序号
 	HashValue %= divisor;
 	EdgNode*p = ht[HashValue], *q = p;
 	//修改一下找位置，使得最终返回本结点的前一个结点
-	while (p->head != u&&p->data->dest != v && p->link != NULL)
+	while (p->data->head != u&&p->data->dest != v && p->link != NULL)
 	{
 		q = p;
 		p = p->link;
 	}
 	return p;
+}
+Edge* Edghash::Find(const int u, const int v)
+{
+	return (FindPos(u, v)->data);
 }
 bool Edghash::Insert(Edge* edge)//这个head也是序号？我们这个题目中貌似不需要序号吧，反正访问的时候，也是通过hash表来的丫
 {

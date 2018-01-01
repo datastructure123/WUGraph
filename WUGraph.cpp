@@ -3,6 +3,8 @@
 Graphlnk::Graphlnk(int sz)
 {
 	maxVertices = sz;
+	first = new Vertex;
+	real = first;
 }
 int Graphlnk::vertexCount()
 {   
@@ -14,16 +16,24 @@ int Graphlnk::edgeCount()
 	return numEdges;
 }
 
-Vertex * Graphlnk::getVertices()
+void Graphlnk::getVertices()
 {   //不太懂要返回什么具体的东西
-	return nullptr;
+	Vertex*p = first->rLink;
+	for(int i=1;p != nullptr;i++)
+	{
+		cout << "第 " << i << " 个结点：\t";
+		cout << p->code<<endl;
+		p = p->rLink;
+	}
 }
 
 void Graphlnk::addVertex(Vertex *x)
 {
 	//先创建一个点，然后调用哈希表和双向链表的插入函数，顶点数+1
 	NodeHashtable.Insert(x);
-	NodeTable.Insert(numVertices, x, 1);
+	real->rLink = x;
+	x->lLink = real;
+	real = x->rLink;
 	numVertices++;
 }
 
@@ -39,25 +49,52 @@ int Graphlnk::isVertex()
 	return 0;
 }
 
-int Graphlnk::degree(int v)
+int Graphlnk::degree(int v)//点的code
 {
 	//从邻接表找到边的个数
-	return 0;
+	return NodeHashtable.Find(v)->degree;
 }
 
-int Graphlnk::getFirstNeighbor(int v1, int v2)
+int Graphlnk::getFirstNeighbor(int v)
 {   
-	return 0;
+	return NodeHashtable.Find(v)->code;
 }
 
 int Graphlnk::getNextNeighbor(int v1, int v2)
 {
-	return 0;
+	return EdgeHashtable.Find(v1, v2)->rLink->dest;
 }
 
-void Graphlnk::addEdge(int v1, int v2)
+void Graphlnk::addEdge(Edge *edge)
 {
 	//添加到哈希表，邻接表，把邻接表的对应位置链接起来
+	EdgeHashtable.Insert(edge);
+	Edge*p,*q,*t;
+	Vertex*temp;
+	temp = NodeHashtable.Find(edge->head);
+	temp->degree++;
+	p=temp->adj;
+	q = p->rLink;
+	p->rLink = edge;
+	edge->rLink = q;
+	edge->lLink = p;
+	q->lLink = edge;
+//////////////////////////////////////////////////////////////////////////////////////////////
+	Edge*current = new Edge;
+	*current = *edge;
+	current->head = edge->dest;
+	current->dest = edge->head;
+	temp = NodeHashtable.Find(edge->dest);
+	temp->degree++;
+	p = temp->adj;
+	q = p->rLink;
+	p->rLink = current;
+	current->rLink = q;
+	current->lLink = p;
+	q->lLink = current;
+/////////////////////////////////////////////////////////////////////////////////////////////
+	current->partner = edge;
+	edge->partner = edge;
 }
 
 void Graphlnk::removeEdge(int v1, int v2)

@@ -9,7 +9,7 @@ struct VerNode//点的哈希表结点
 struct EdgNode//边的哈希表结点
 {
 	Edge* data=nullptr;
-	int head;//边的起点
+	//int head;//边的起点             //在边结点里增加量
 	EdgNode *link=nullptr;
 	EdgNode *last=nullptr;
 };
@@ -33,6 +33,7 @@ public:
 	~Verhash() { delete[]ht; };
 	bool Remove(const int num);
 	bool Search(const int num);
+	Vertex* Find(const int num);
 	bool Insert(Vertex* vertex);
 private:
 	VerNode**ht;
@@ -46,6 +47,7 @@ public:
 	Edghash(int d,int sz);
     ~Edghash() { delete[]ht; };
 	bool Remove(const int u,const int v);
+	Edge* Find(const int u,const int v);
 	bool Search(const int u, const int v);
 	bool Insert(Edge* edge);//不仅要把边指针传进来，也要把边的另一半传进来
 private:
