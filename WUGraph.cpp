@@ -5,6 +5,7 @@ Graphlnk::Graphlnk(int sz)
 	maxVertices = sz;
 	first = new Vertex;
 	real = first;
+	edg_sort = new Edge;
 }
 
 int Graphlnk::vertexCount()
@@ -170,7 +171,32 @@ int Graphlnk::weight(const int u,const int v)
 
 void Graphlnk::sort_edge(bool cmp_(const Edge&, const Edge&))
 {
-
+	Vertex*p = first;
+	while (p !=nullptr)
+	{
+		Edge*q = p->adj->rLink;
+		while (q != nullptr)
+		{
+			if (edg_sort->rLink == nullptr)
+			{
+				edg_sort->rLink = q;
+			}
+			else
+			{
+				Edge* temp = edg_sort->rLink,*m;
+				while (temp!=nullptr)
+				{
+					m = temp;
+					if (temp->cost < q->cost)
+						temp = temp->rLink;
+				}
+				q->rLink = m->rLink;
+				m->rLink = q;
+			}
+			q = q->rLink;
+		}
+		p = p->rLink;
+	}
 }
 
 bool comp(const Edge& a, const Edge& b)
