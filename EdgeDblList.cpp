@@ -4,9 +4,8 @@ EdgeDblList::~EdgeDblList()
 {
 }
 
-Edge * EdgeDblList::Search(const int & x, int d)
+Edge * EdgeDblList::Locate(int i, int d)
 {
-	int i = x;
 	if (i<0) return NULL;
 	if (first->rLink == first || i == 0) return first;//空双向循环链表或i为0
 	Edge *current;//遍历指针
@@ -20,10 +19,10 @@ Edge * EdgeDblList::Search(const int & x, int d)
 		else return NULL;
 }
 
-bool EdgeDblList::Insert(int i, const int & x, int d)
+bool EdgeDblList::Insert(int i,  Edge * x, int d)
 {
-	Edge * current = Search(x,d);
-	Edge *newNode = new Edge(x,d);
+	Edge * current = Locate(i,d);
+	Edge * newNode = x;
 	newNode->lLink = current->lLink;
 	current->lLink = newNode;
 	newNode->lLink->rLink = newNode;
@@ -31,7 +30,13 @@ bool EdgeDblList::Insert(int i, const int & x, int d)
 	return true;
 }
 
-bool EdgeDblList::Remove(int i, int & x, int d)
+bool EdgeDblList::Remove(int i, Edge* x, int d)
 {
-	return false;
+	Edge * current = Locate(i,d);
+	current->rLink->lLink = current->lLink;
+	current->lLink->rLink = current->rLink;
+	x = current;
+	delete current;
+	return true;
 }
+
