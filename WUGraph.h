@@ -14,10 +14,6 @@ class Graphlnk
 public:
 	Graphlnk(int sz = MaxVertices);
 	~Graphlnk();
-	bool comp(const Edge& a, const Edge& b)
-	{
-		return a.cost < b.cost;
-	}
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
 	Vertex * getVertices();  //返回包含所有顶点的数组

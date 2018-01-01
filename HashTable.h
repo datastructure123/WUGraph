@@ -18,7 +18,7 @@ class Hash
 public:
 	Hash();
 	~Hash() {};
-	virtual bool Search(const int num) {}//≤È’“
+	virtual bool Search(const int num) { return true; }//≤È’“
 protected:
 	int key;
 	int divisor;
