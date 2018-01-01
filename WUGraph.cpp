@@ -6,6 +6,7 @@ Graphlnk::Graphlnk(int sz)
 	first = new Vertex;
 	real = first;
 }
+
 int Graphlnk::vertexCount()
 {   
 	return numVertices;
@@ -30,39 +31,65 @@ void Graphlnk::getVertices()
 void Graphlnk::addVertex(Vertex *x)
 {
 	//先创建一个点，然后调用哈希表和双向链表的插入函数，顶点数+1
-	NodeHashtable.Insert(x);
-	real->rLink = x;
-	x->lLink = real;
-	real = x->rLink;
-	numVertices++;
+	if (NodeHashtable.Insert(x))
+	{
+		real->rLink = x;
+		x->lLink = real;
+		real = x->rLink;
+		numVertices++;
+	}
 }
 
-void Graphlnk::removeVertex()
+void Graphlnk::removeVertex(int num)
 {
-
+	Vertex*p;
+	p = NodeHashtable.Find(num);
+	if (p!= nullptr)
+	{
+		Edge *q = p->adj->rLink;
+		while (q != nullptr)
+		{
+			removeEdge(p->code, q->dest);//同时删一对
+			q = q->rLink;
+		}
+		NodeHashtable.Remove(num);
+	}
 	//删除哈希表里的和双向链表里的
 }
 
-int Graphlnk::isVertex()
+int Graphlnk::isVertex(int num)
 {
 	//从哈希表里遍历顶点
-	return 0;
+	if (NodeHashtable.Search(num))
+		return 1;
+	else return -1;
 }
 
 int Graphlnk::degree(int v)//点的code
 {
 	//从邻接表找到边的个数
-	return NodeHashtable.Find(v)->degree;
+	Vertex *p;
+	p = NodeHashtable.Find(v);
+	if (p != nullptr)
+		return p->degree;
+	else return -1;
 }
 
 int Graphlnk::getFirstNeighbor(int v)
 {   
-	return NodeHashtable.Find(v)->code;
+	Vertex *p;
+	p = NodeHashtable.Find(v);
+	if (p != nullptr)
+		return p->code;
+	else return -1;
 }
 
 int Graphlnk::getNextNeighbor(int v1, int v2)
 {
-	return EdgeHashtable.Find(v1, v2)->rLink->dest;
+	Edge *p = EdgeHashtable.Find(v1, v2);
+	if(p!=nullptr)
+	return p->rLink->dest;
+	else return -1;
 }
 
 void Graphlnk::addEdge(Edge *edge)
@@ -99,28 +126,58 @@ void Graphlnk::addEdge(Edge *edge)
 
 void Graphlnk::removeEdge(int v1, int v2)
 {
-	//从哈希表找到边，然后找到邻接表的半条边，再通过伙伴指针删除另外半条边
+	if (EdgeHashtable.Remove(v1, v2))
+	{
+		NodeHashtable.Find(v1)->degree--;
+		//从哈希表找到边，然后找到邻接表的半条边，再通过伙伴指针删除另外半条边
+		Edge *p, *q, *t;
+		p = EdgeHashtable.Find(v1, v2);
+		q = p->lLink;
+		t = p->rLink;
+		q->rLink = t;
+		t->lLink = q;
+		///////////////////////////////////////////////////////////////////////////////////
+		NodeHashtable.Find(v2)->degree--;
+		Edge *m, *n, *k;
+		m = p->partner;
+		n = p->lLink;
+		k = p->rLink;
+		n->rLink = k;
+		k->lLink = n;
+		///////////////////////////////////////////////////////////////////////////////////
+		delete p, m;
+	}
+
 }
 
-int Graphlnk::isEdge()
+int Graphlnk::isEdge(const int u,const int v)
 {
 	//用哈希表直接遍历边
+	if (EdgeHashtable.Search(u, v))
+		return 1;
+	else return -1;
 	return 0;
 }
 
-int Graphlnk::weight()
+int Graphlnk::weight(const int u,const int v)
 {
+	Edge*p=EdgeHashtable.Find(u, v);
+	if(p!=nullptr)
+	return p->cost;
+	else return -1;
 	//用哈希表遍历边
-	return 0;
 }
+
 void Graphlnk::sort_edge(bool cmp_(const Edge&, const Edge&))
 {
 
 }
+
 bool comp(const Edge& a, const Edge& b)
 {
 	return a.cost < b.cost;
 }
+
 void Graphlnk::kruskal(int v)
 {
 	//克鲁斯卡算法
@@ -142,4 +199,5 @@ void Graphlnk::kruskal(int v)
 	//接着调用输出函数
 	//result是最小值
 
-}                                                                                                                                                                                                     
+}             
+
