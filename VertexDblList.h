@@ -11,7 +11,7 @@ public:
 	~VertexDblList();
 	Vertex *getHead() const { return first; }
 	void setHead(Vertex *ptr) { first = ptr; }
-	Vertex *Search(const int& x, int d);
+	//Vertex *Search(const int& x, int d);
 	Vertex *Locate(int i, int d);
 	bool Insert(int i, Vertex * x, int d);
 	bool Remove(int i, Vertex * x, int d); //删除第i个结点

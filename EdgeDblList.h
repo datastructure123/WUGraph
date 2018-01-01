@@ -11,9 +11,9 @@ public:
 	~EdgeDblList();
 	Edge *getHead() const { return first; }
 	void setHead(Edge *ptr) { first = ptr; }
-	Edge *Search(const int& x, int d);
-	bool Insert(int i, const int& x, int d);
-	bool Remove(int i, int& x, int d); 
+	Edge *Locate(int i, int d);
+	bool Insert(int i, Edge * x, int d);
+	bool Remove(int i, Edge * x, int d); //删除第i个结点
 	bool IsEmpty() { return first->rLink == first; }
 	//判双链表空否
 private:
