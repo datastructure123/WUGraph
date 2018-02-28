@@ -34,9 +34,10 @@ void Graphlnk::addVertex(Vertex *x)
 	//先创建一个点，然后调用哈希表和双向链表的插入函数，顶点数+1
 	if (NodeHashtable.Insert(x))
 	{
-		real->rLink = x;
-		x->lLink = real;
-		real = x->rLink;
+		Vertex *temp;
+		temp = real;
+		x->lLink = temp;
+		real = x;///这里也有问题！！！
 		numVertices++;
 	}
 }

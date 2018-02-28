@@ -9,7 +9,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Hash::Hash()
 {
-	divisor = 0;
+	divisor = 1000;
 	TableSize = 0;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,6 +42,19 @@ Verhash::Verhash(int d, int sz)
 	divisor = d;
 	TableSize = sz;
 	ht = new VerNode*[sz];
+	for (int i = 0; i < sz; i++)
+	{
+		ht[i] = nullptr;
+	}
+	assert(ht != NULL);
+}
+Verhash::Verhash()
+{
+	ht = new VerNode*[1000];
+	for (int i = 0; i < 1000; i++)
+	{
+		ht[i] = nullptr;
+	}
 	assert(ht != NULL);
 }
 VerNode* Verhash::FindPos(const int num)
@@ -85,6 +98,7 @@ bool Verhash::Insert(Vertex* vertex)
 	}
 	else//p本身是null的情况
 	{
+		p = new VerNode;
 		p->data = vertex;
 		p->link = q;
 	}

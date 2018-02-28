@@ -1,7 +1,5 @@
 #pragma 
 #include"Vertex.h"
-#include"VertexDblList.h"
-#include"EdgeDblList.h"
 #include"HashTable.h"
 using namespace std;
 //const int maxWeight = INT_MAX;
@@ -12,7 +10,7 @@ const int DeafultVertices = 30;			//代表最大顶点数 =n
 class Graphlnk
 {
 public:
-	Graphlnk(int sz = MaxVertices);
+	Graphlnk(int sz);
 	~Graphlnk() {};
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
@@ -25,15 +23,15 @@ public:
 	int getNextNeighbor(int v1, int v2); //返回下一个邻接顶点
 	void addEdge(Edge* edge);        //添加边
 	void removeEdge(int v1, int v2);     //删除边
-	int isEdge(const int u,const int v);                        //判断是否为边
-	int weight(const int u,const int v);                        //求某边的权值
+	int isEdge(const int u, const int v);                        //判断是否为边
+	int weight(const int u, const int v);                        //求某边的权值
 	void kruskal(int v);                 //克鲁斯卡算法
 private:
 	void sort_edge(bool cmp_(const Edge&, const Edge&));
 	//并查集所需
 	Edge *edg_sort;   //存储排好序的边
-	Verhash  NodeHashtable{ maxVertices,maxVertices };
-	Edghash  EdgeHashtable{maxVertices,maxVertices};
+	Verhash  NodeHashtable{MaxVertices, MaxVertices};////这里有很大的疑惑
+	Edghash  EdgeHashtable{MaxVertices,MaxVertices};////
 	//VertexDblList NodeTable;
 	Vertex *real;
 	Vertex *first;

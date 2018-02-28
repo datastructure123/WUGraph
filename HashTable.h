@@ -28,7 +28,7 @@ protected:
 class Verhash:public Hash//µãµÄ¹şÏ£±í
 {
 public:
-	Verhash(){}
+	Verhash();
 	Verhash(int d,int sz);
 	~Verhash() { delete[]ht; };
 	bool Remove(const int num);
