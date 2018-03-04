@@ -4,7 +4,7 @@ Graphlnk::Graphlnk(int sz)
 {
 	maxVertices = sz;
 	first = new Vertex;
-	real = first;
+	real = nullptr;
 	edg_sort = new Edge;
 }
 
