@@ -1,30 +1,7 @@
 #include<iostream>
 #include"WUGraph.h"
-#include<fstream>
 #include<string>
 using namespace std;
-void Initial(Graphlnk M)
-{
-	ifstream read, inE;
-	read.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\city.txt");
-	while (!read.eof())
-	{
-		Vertex *a = new Vertex();
-		read >> a->code >> a->name;
-		M.addVertex(a);
-	}
-	read.close();
-	inE.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\lines.txt");
-	while (!inE.eof())
-	{
-		Edge *b = new Edge();
-		inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
-		M.addEdge(b);
-	}
-
-	inE.close();
-	return;
-}
 void main()
 {
 	char x;
@@ -33,7 +10,7 @@ void main()
 	string End;
 	Graphlnk Railway(100000);
 
-	Initial(Railway);
+	Railway.Initial();
 	while (1) {
 		cout << "================旅游导航系统系统=================" << endl
 			<< "==           1.旅游城市信息                      ==" << endl

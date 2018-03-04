@@ -1,6 +1,9 @@
 #pragma 
+#include<iostream>
+#include<fstream>
 #include"Vertex.h"
 #include"HashTable.h"
+
 using namespace std;
 //const int maxWeight = INT_MAX;
 const int DefaultSize = 100;
@@ -12,6 +15,7 @@ class Graphlnk
 public:
 	Graphlnk(int sz);
 	~Graphlnk() {};
+	void Initial();
 	int vertexCount();       //返回图中的顶点数
 	int edgeCount();         //返回图中的边数
 	void getVertices();  //返回包含所有顶点的数组

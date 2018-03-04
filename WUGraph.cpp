@@ -1,14 +1,41 @@
 #include "WUGraph.h"
-
+#include<assert.h>
 Graphlnk::Graphlnk(int sz)
 {
 	maxVertices = sz;
 	first = new Vertex;
 	real = nullptr;
 	edg_sort = new Edge;
+	numVertices = 0;
+	numEdges = 0;
 }
 
-
+void Graphlnk::Initial()
+{
+	ifstream read, inE;
+	read.open("city.txt");
+	while (!read.eof())
+	{
+		Vertex *a = new Vertex();
+		read >> a->code >> a->name;
+		if (read.eof())
+			break;
+		addVertex(a);
+	}
+	read.close();
+	inE.open("lines.txt");
+	int i = 0;
+	while (!inE.eof())
+	{
+		Edge *b = new Edge();
+		inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
+		if (inE.eof())
+			break;
+		addEdge(b);
+	}
+	inE.close();
+	return;
+}
 int Graphlnk::vertexCount()
 {   
 	return numVertices;
@@ -25,7 +52,7 @@ void Graphlnk::getVertices()
 	for(int i=1;p != nullptr;i++)
 	{
 		cout << "第 " << i << " 个结点：\t";
-		cout << p->code<<endl;
+		cout << p->code<<p->name<<endl;
 		p = p->rLink;
 	}
 }
@@ -42,7 +69,7 @@ void Graphlnk::addVertex(Vertex *x)
 			first->rLink = x;
 			x->rLink = first;
 			real = x;
-			
+			numVertices++;
 		}
 		else
 		{
@@ -128,6 +155,8 @@ void Graphlnk::addEdge(Edge *edge)
 	EdgeHashtable.Insert(edge);
 	Edge*p,*q,*t;
 	Vertex*temp;
+	if (edge->head == 0)
+		cout << "!" << endl;
 	temp = NodeHashtable.Find(edge->head);
 	temp->degree++;
 	p=temp->adj;
