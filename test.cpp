@@ -6,7 +6,7 @@ using namespace std;
 void Initial(Graphlnk M)
 {
 	ifstream read, inE;
-	read.open("city.txt");
+	read.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\city.txt");
 	while (!read.eof())
 	{
 		Vertex *a = new Vertex();
@@ -14,13 +14,14 @@ void Initial(Graphlnk M)
 		M.addVertex(a);
 	}
 	read.close();
-	inE.open("lines.txt");
-	while (!inE.eof())
-	{
-		Edge *b = new Edge();
-		inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
-		M.addEdge(b);
-	}
+	inE.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\lines.txt");
+//	while (!inE.eof())
+	//{
+		//Edge *b = new Edge();
+		//inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
+		//M.addEdge(b);
+	//}
+
 	inE.close();
 	return;
 }

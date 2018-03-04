@@ -87,7 +87,7 @@ bool Verhash::Search(const int num)
 }
 bool Verhash::Insert(Vertex* vertex)
 {
-	VerNode*p,*q;
+	VerNode*p, *q;
 	p = FindPos(vertex->code);
 	q = p;
 	if (p != NULL&&p->link == NULL)
@@ -96,7 +96,7 @@ bool Verhash::Insert(Vertex* vertex)
 		p->link->data = vertex;
 		p->link->last = q;
 	}
-	else if(p!=NULL&&p->link!=NULL)
+	else if (p != NULL&&p->link != NULL)
 	{
 		return false;//已经存在插入失败
 	}
