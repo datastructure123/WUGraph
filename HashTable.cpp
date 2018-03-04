@@ -41,20 +41,23 @@ Verhash::Verhash(int d, int sz)
 {
 	divisor = d;
 	TableSize = sz;
-	ht = new VerNode*[sz];
-	for (int i = 0; i < sz; i++)
+	ht = (VerNode**)new VerNode*[1000];
+	for (int i = 0; i < 1000; i++)
 	{
-		ht[i] = nullptr;
+		ht[i] = new VerNode[1000];
+		ht[i]->data = new Vertex;
 	}
 	assert(ht != NULL);
 }
 Verhash::Verhash()
 {
-	ht = new VerNode*[1000];
+	ht = (VerNode**)new VerNode*[1000];
 	for (int i = 0; i < 1000; i++)
 	{
-		ht[i] = nullptr;
+		ht[i] = new VerNode[1000];
+		ht[i]->data = new Vertex;
 	}
+	
 	assert(ht != NULL);
 }
 VerNode* Verhash::FindPos(const int num)
@@ -65,7 +68,7 @@ VerNode* Verhash::FindPos(const int num)
 	while (p != NULL&&p->data->code!= num)
 	{
 		q = p;
-		p = p->link;
+		p = p->link;	
 	}
 	return q;
 }
@@ -89,6 +92,7 @@ bool Verhash::Insert(Vertex* vertex)
 	q = p;
 	if (p != NULL&&p->link == NULL)
 	{
+		p->link = new VerNode;
 		p->link->data = vertex;
 		p->link->last = q;
 	}
@@ -114,7 +118,12 @@ Edghash::Edghash(int d, int sz)
 {
 	divisor = d;
 	TableSize = sz;
-	ht = new EdgNode*[sz];
+	ht = (EdgNode**)new EdgNode*[1000];
+	for (int i = 0; i < 1000; i++)
+	{
+		ht[i] = new EdgNode[1000];
+		ht[i]->data =new Edge;
+	}
 	assert(ht != NULL);
 }
 EdgNode* Edghash::FindPos(const int u, const int v)//这里的U v是序号
@@ -128,7 +137,7 @@ EdgNode* Edghash::FindPos(const int u, const int v)//这里的U v是序号
 		q = p;
 		p = p->link;
 	}
-	return p;
+	return q;
 }
 Edge* Edghash::Find(const int u, const int v)
 {
@@ -141,6 +150,7 @@ bool Edghash::Insert(Edge* edge)//这个head也是序号？我们这个题目中貌似不需要序号
 	q = p;
 	if (p != NULL&&p->link == NULL)
 	{
+		p->link = new EdgNode;
 		p->link->data = edge;
 		p->link->last = q;
 	}
