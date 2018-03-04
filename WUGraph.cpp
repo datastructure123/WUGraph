@@ -36,6 +36,8 @@ void Graphlnk::addVertex(Vertex *x)
 	{
 		Vertex *temp;
 		temp = real;
+		if (temp == nullptr)
+			first->rLink = x;
 		x->lLink = temp;
 		real = x;///这里也有问题！！！
 		numVertices++;
@@ -44,8 +46,8 @@ void Graphlnk::addVertex(Vertex *x)
 
 void Graphlnk::removeVertex(int num)
 {
-	Vertex*p;
-	p = NodeHashtable.Find(num);
+	Vertex*p,*t;
+	t = p = NodeHashtable.Find(num);
 	if (p!= nullptr)
 	{
 		Edge *q = p->adj->rLink;
@@ -56,6 +58,21 @@ void Graphlnk::removeVertex(int num)
 		}
 		NodeHashtable.Remove(num);
 	}
+	//删除邻接链表里的
+	if (t != nullptr)
+	{
+		Vertex *a = real;
+		real = real->lLink;
+		p->adj = a->adj;
+		p->code = a->code;
+		p->degree = a->degree;
+		p->key = a->key;
+		p->name = a->name;
+		real->rLink = nullptr;
+		a = nullptr;
+		numVertices--;
+	}
+
 	//删除哈希表里的和双向链表里的
 }
 

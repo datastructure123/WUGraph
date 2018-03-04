@@ -15,12 +15,12 @@ void Initial(Graphlnk M)
 	}
 	read.close();
 	inE.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\lines.txt");
-	while (!inE.eof())
-	{
-		Edge *b = new Edge();
-		inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
-		M.addEdge(b);
-	}
+//	while (!inE.eof())
+	//{
+		//Edge *b = new Edge();
+		//inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
+		//M.addEdge(b);
+	//}
 	inE.close();
 	return;
 }
@@ -43,7 +43,7 @@ void main()
 		switch (x)
 		{
 		case'1':
-			cout << "城市：" << "数量" << Railway.vertexCount << endl;
+			cout << "城市：" << "数量" << Railway.vertexCount() << endl;
 			Railway.getVertices();
 			c = getchar();
 			break;

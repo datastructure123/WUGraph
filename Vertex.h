@@ -8,7 +8,7 @@ class  Edge
 public:
 	int dest=0;            //边的另一个顶点的真实code
 	int cost=0;              //边上的权值
-	int dist = 0;
+	int dist = 0; //边的距离
 	int key=0;     //边的关键码
 	int head=0;//存终点
 	string d_name="";
@@ -27,9 +27,9 @@ public:
 class Vertex
 {
 public:
-	int key=0;
-	int code=0;//点的实际值
-	string name="";
+	int key=0;//关键值
+	int code=0;//点的实际值即编号
+	string name="";//点的name
 	int degree=0;//点的度数
 	Edge *adj=new Edge();
 	Vertex *rLink=nullptr, *lLink=nullptr;
