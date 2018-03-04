@@ -8,6 +8,7 @@ Graphlnk::Graphlnk(int sz)
 	edg_sort = new Edge;
 }
 
+
 int Graphlnk::vertexCount()
 {   
 	return numVertices;
@@ -46,9 +47,9 @@ void Graphlnk::addVertex(Vertex *x)
 
 void Graphlnk::removeVertex(int num)
 {
-	Vertex*p,*t;
+	Vertex*p, *t;
 	t = p = NodeHashtable.Find(num);
-	if (p!= nullptr)
+	if (p != nullptr)
 	{
 		Edge *q = p->adj->rLink;
 		while (q != nullptr)
@@ -75,6 +76,7 @@ void Graphlnk::removeVertex(int num)
 
 	//删除哈希表里的和双向链表里的
 }
+
 
 int Graphlnk::isVertex(int num)
 {
