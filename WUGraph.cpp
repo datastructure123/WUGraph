@@ -38,10 +38,19 @@ void Graphlnk::addVertex(Vertex *x)
 		Vertex *temp;
 		temp = real;
 		if (temp == nullptr)
+		{
 			first->rLink = x;
-		x->lLink = temp;
-		real = x;///这里也有问题！！！
-		numVertices++;
+			x->rLink = first;
+			real = x;
+			
+		}
+		else
+		{
+			x->lLink = temp;
+			temp->rLink = x;
+			real = x;///这里也有问题！！！
+			numVertices++;
+		}
 	}
 }
 
@@ -122,6 +131,7 @@ void Graphlnk::addEdge(Edge *edge)
 	temp = NodeHashtable.Find(edge->head);
 	temp->degree++;
 	p=temp->adj;
+	p->lLink = p->rLink = new Edge;
 	q = p->rLink;
 	p->rLink = edge;
 	edge->rLink = q;
@@ -135,6 +145,7 @@ void Graphlnk::addEdge(Edge *edge)
 	temp = NodeHashtable.Find(edge->dest);
 	temp->degree++;
 	p = temp->adj;
+	p->lLink = p->rLink = new Edge;
 	q = p->rLink;
 	p->rLink = current;
 	current->rLink = q;
