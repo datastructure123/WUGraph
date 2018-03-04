@@ -2,13 +2,13 @@
 #include"Vertex.h"
 struct VerNode//点的哈希表结点
 {
-	Vertex* data=nullptr;
+	Vertex* data= nullptr;
 	VerNode *link=nullptr;
 	VerNode* last=nullptr;//指向前一个结点；
 };
 struct EdgNode//边的哈希表结点
 {
-	Edge* data=nullptr;
+	Edge* data= nullptr;
 	//int head;//边的起点             //在边结点里增加量
 	EdgNode *link=nullptr;
 	EdgNode *last=nullptr;

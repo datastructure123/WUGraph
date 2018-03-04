@@ -6,7 +6,7 @@ using namespace std;
 void Initial(Graphlnk M)
 {
 	ifstream read, inE;
-	read.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\city.txt");
+	read.open("city.txt");
 	while (!read.eof())
 	{
 		Vertex *a = new Vertex();
@@ -14,7 +14,7 @@ void Initial(Graphlnk M)
 		M.addVertex(a);
 	}
 	read.close();
-	inE.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\lines.txt");
+	inE.open("lines.txt");
 	while (!inE.eof())
 	{
 		Edge *b = new Edge();
@@ -43,7 +43,7 @@ void main()
 		switch (x)
 		{
 		case'1':
-			cout << "城市：" << "数量" << Railway.vertexCount << endl;
+			cout << "城市：" << "数量" << Railway.vertexCount() << endl;
 			Railway.getVertices();
 			c = getchar();
 			break;
