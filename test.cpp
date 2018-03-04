@@ -14,15 +14,6 @@ void Initial(Graphlnk M)
 		M.addVertex(a);
 	}
 	read.close();
-<<<<<<< HEAD
-	inE.open("C:\\Users\\dell\\Desktop\\学习大二上\\DataStructure\\WUG\\lines.txt");
-//	while (!inE.eof())
-	//{
-		//Edge *b = new Edge();
-		//inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
-		//M.addEdge(b);
-	//}
-=======
 	inE.open("lines.txt");
 	while (!inE.eof())
 	{
@@ -30,7 +21,6 @@ void Initial(Graphlnk M)
 		inE >> b->head >> b->h_name >> b->dest >> b->d_name >> b->dist >> b->cost;
 		M.addEdge(b);
 	}
->>>>>>> eb6f8ef18e80bd33d4d6173ec8676c013bed3d4f
 	inE.close();
 	return;
 }

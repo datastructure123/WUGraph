@@ -74,7 +74,7 @@ VerNode* Verhash::FindPos(const int num)
 }
 Vertex* Verhash::Find(const int num)
 {
-	return (FindPos(num)->data);
+	return (FindPos(num)->link->data);
 }
 bool Verhash::Search(const int num)
 {
