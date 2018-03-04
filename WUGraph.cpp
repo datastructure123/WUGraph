@@ -122,6 +122,7 @@ void Graphlnk::addEdge(Edge *edge)
 	temp = NodeHashtable.Find(edge->head);
 	temp->degree++;
 	p=temp->adj;
+	p->lLink = p->rLink = new Edge;
 	q = p->rLink;
 	p->rLink = edge;
 	edge->rLink = q;
@@ -135,6 +136,7 @@ void Graphlnk::addEdge(Edge *edge)
 	temp = NodeHashtable.Find(edge->dest);
 	temp->degree++;
 	p = temp->adj;
+	p->lLink = p->rLink = new Edge;
 	q = p->rLink;
 	p->rLink = current;
 	current->rLink = q;
