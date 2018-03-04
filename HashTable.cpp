@@ -132,8 +132,12 @@ EdgNode* Edghash::FindPos(const int u, const int v)//这里的U v是序号
 	HashValue %= divisor;
 	EdgNode*p = ht[HashValue], *q = p;
 	//修改一下找位置，使得最终返回本结点的前一个结点
-	while (p->data->head != u&&p->data->dest != v && p->link != NULL)
+	while (p->link != NULL)
 	{
+		if (p->data->head == u && p->data->dest == v)
+		{
+			break;
+		}
 		q = p;
 		p = p->link;
 	}
