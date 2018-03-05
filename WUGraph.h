@@ -9,32 +9,32 @@ using namespace std;
 const int DefaultSize = 100;
 const int MaxVertices = 10000;
 //enum KindOfStatus { Active, Empty, Deleted };
-const int DeafultVertices = 30;			//ä»£è¡¨æœ€å¤§é¡¶ç‚¹æ•° =n
+const int DeafultVertices = 30;			//´ú±í×î´ó¶¥µãÊı =n
 class Graphlnk
 {
 public:
 	Graphlnk(int sz);
 	~Graphlnk() {};
 	void Initial();
-	int vertexCount();       //è¿”å›å›¾ä¸­çš„é¡¶ç‚¹æ•°
-	int edgeCount();         //è¿”å›å›¾ä¸­çš„è¾¹æ•°
-	void getVertices();  //è¿”å›åŒ…å«æ‰€æœ‰é¡¶ç‚¹çš„æ•°ç»„
-	void addVertex(Vertex *x);        //æ·»åŠ é¡¶ç‚¹
-	void removeVertex(int num);     //åˆ é™¤é¡¶ç‚¹
-	int isVertex(int num);          //åˆ¤æ–­è¯¥é¡¶ç‚¹æ˜¯å¦åœ¨å›¾ä¸­
-	int degree(int v);       //é¡¶ç‚¹çš„åº¦
-	int getFirstNeighbor(int v);//è¿”å›ç¬¬ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
-	int getNextNeighbor(int v1, int v2); //è¿”å›ä¸‹ä¸€ä¸ªé‚»æ¥é¡¶ç‚¹
-	void addEdge(Edge* edge);        //æ·»åŠ è¾¹
-	void removeEdge(int v1, int v2);     //åˆ é™¤è¾¹
-	int isEdge(const int u, const int v);                        //åˆ¤æ–­æ˜¯å¦ä¸ºè¾¹
-	int weight(const int u, const int v);                        //æ±‚æŸè¾¹çš„æƒå€¼
-	void kruskal(int v);                 //å…‹é²æ–¯å¡ç®—æ³•
+	int vertexCount();       //·µ»ØÍ¼ÖĞµÄ¶¥µãÊı
+	int edgeCount();         //·µ»ØÍ¼ÖĞµÄ±ßÊı
+	void getVertices();  //·µ»Ø°üº¬ËùÓĞ¶¥µãµÄÊı×é
+	void addVertex(Vertex *x);        //Ìí¼Ó¶¥µã
+	void removeVertex(int num);     //É¾³ı¶¥µã
+	int isVertex(int num);          //ÅĞ¶Ï¸Ã¶¥µãÊÇ·ñÔÚÍ¼ÖĞ
+	int degree(int v);       //¶¥µãµÄ¶È
+	int getFirstNeighbor(int v);//·µ»ØµÚÒ»¸öÁÚ½Ó¶¥µã
+	int getNextNeighbor(int v1, int v2); //·µ»ØÏÂÒ»¸öÁÚ½Ó¶¥µã
+	void addEdge(Edge* edge);        //Ìí¼Ó±ß
+	void removeEdge(int v1, int v2);     //É¾³ı±ß
+	int isEdge(const int u, const int v);                        //ÅĞ¶ÏÊÇ·ñÎª±ß
+	int weight(const int u, const int v);                        //ÇóÄ³±ßµÄÈ¨Öµ
+	void kruskal(int v);                 //¿ËÂ³Ë¹¿¨Ëã·¨
 private:
 	void sort_edge(bool cmp_(const Edge&, const Edge&));
-	//å¹¶æŸ¥é›†æ‰€éœ€
-	Edge *edg_sort;   //å­˜å‚¨æ’å¥½åºçš„è¾¹
-	Verhash  NodeHashtable{MaxVertices, MaxVertices};////è¿™é‡Œæœ‰å¾ˆå¤§çš„ç–‘æƒ‘
+	//²¢²é¼¯ËùĞè
+	Edge *edg_sort;   //´æ´¢ÅÅºÃĞòµÄ±ß
+	Verhash  NodeHashtable{MaxVertices, MaxVertices};////ÕâÀïÓĞºÜ´óµÄÒÉ»ó
 	Edghash  EdgeHashtable{MaxVertices,MaxVertices};////
 	//VertexDblList NodeTable;
 	Vertex *real;

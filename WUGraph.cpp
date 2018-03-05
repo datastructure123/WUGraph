@@ -17,7 +17,9 @@ void Graphlnk::Initial()
 	while (!read.eof())
 	{
 		Vertex *a = new Vertex();
-		read >> a->code >> a->name;
+		int t;
+		read >> t >> a->name;
+		a->code = t;
 		if (read.eof())
 			break;
 		addVertex(a);
@@ -47,11 +49,11 @@ int Graphlnk::edgeCount()
 }
 
 void Graphlnk::getVertices()
-{   //ä¸å¤ªæ‡‚è¦è¿”å›ä»€ä¹ˆå…·ä½“çš„ä¸œè¥¿
+{   //²»Ì«¶®Òª·µ»ØÊ²Ã´¾ßÌåµÄ¶«Î÷
 	Vertex*p = first->rLink;
 	for(int i=1;p != nullptr;i++)
 	{
-		cout << "ç¬¬ " << i << " ä¸ªç»“ç‚¹ï¼š\t";
+		cout << "µÚ " << i << " ¸ö½áµã£º\t";
 		cout << p->code<<p->name<<endl;
 		p = p->rLink;
 	}
@@ -59,7 +61,7 @@ void Graphlnk::getVertices()
 
 void Graphlnk::addVertex(Vertex *x)
 {
-	//å…ˆåˆ›å»ºä¸€ä¸ªç‚¹ï¼Œç„¶åè°ƒç”¨å“ˆå¸Œè¡¨å’ŒåŒå‘é“¾è¡¨çš„æ’å…¥å‡½æ•°ï¼Œé¡¶ç‚¹æ•°+1
+	//ÏÈ´´½¨Ò»¸öµã£¬È»ºóµ÷ÓÃ¹şÏ£±íºÍË«ÏòÁ´±íµÄ²åÈëº¯Êı£¬¶¥µãÊı+1
 	if (NodeHashtable.Insert(x))
 	{
 		Vertex *temp;
@@ -75,7 +77,7 @@ void Graphlnk::addVertex(Vertex *x)
 		{
 			x->lLink = temp;
 			temp->rLink = x;
-			real = x;///è¿™é‡Œä¹Ÿæœ‰é—®é¢˜ï¼ï¼ï¼
+			real = x;///ÕâÀïÒ²ÓĞÎÊÌâ£¡£¡£¡
 			numVertices++;
 		}
 	}
@@ -90,12 +92,12 @@ void Graphlnk::removeVertex(int num)
 		Edge *q = p->adj->rLink;
 		while (q != nullptr)
 		{
-			removeEdge(p->code, q->dest);//åŒæ—¶åˆ ä¸€å¯¹
+			removeEdge(p->code, q->dest);//Í¬Ê±É¾Ò»¶Ô
 			q = q->rLink;
 		}
 		NodeHashtable.Remove(num);
 	}
-	//åˆ é™¤é‚»æ¥é“¾è¡¨é‡Œçš„
+	//É¾³ıÁÚ½ÓÁ´±íÀïµÄ
 	if (t != nullptr)
 	{
 		Vertex *a = real;
@@ -110,21 +112,21 @@ void Graphlnk::removeVertex(int num)
 		numVertices--;
 	}
 
-	//åˆ é™¤å“ˆå¸Œè¡¨é‡Œçš„å’ŒåŒå‘é“¾è¡¨é‡Œçš„
+	//É¾³ı¹şÏ£±íÀïµÄºÍË«ÏòÁ´±íÀïµÄ
 }
 
 
 int Graphlnk::isVertex(int num)
 {
-	//ä»å“ˆå¸Œè¡¨é‡Œéå†é¡¶ç‚¹
+	//´Ó¹şÏ£±íÀï±éÀú¶¥µã
 	if (NodeHashtable.Search(num))
 		return 1;
 	else return -1;
 }
 
-int Graphlnk::degree(int v)//ç‚¹çš„code
+int Graphlnk::degree(int v)//µãµÄcode
 {
-	//ä»é‚»æ¥è¡¨æ‰¾åˆ°è¾¹çš„ä¸ªæ•°
+	//´ÓÁÚ½Ó±íÕÒµ½±ßµÄ¸öÊı
 	Vertex *p;
 	p = NodeHashtable.Find(v);
 	if (p != nullptr)
@@ -151,7 +153,7 @@ int Graphlnk::getNextNeighbor(int v1, int v2)
 
 void Graphlnk::addEdge(Edge *edge)
 {
-	//æ·»åŠ åˆ°å“ˆå¸Œè¡¨ï¼Œé‚»æ¥è¡¨ï¼ŒæŠŠé‚»æ¥è¡¨çš„å¯¹åº”ä½ç½®é“¾æ¥èµ·æ¥
+	//Ìí¼Óµ½¹şÏ£±í£¬ÁÚ½Ó±í£¬°ÑÁÚ½Ó±íµÄ¶ÔÓ¦Î»ÖÃÁ´½ÓÆğÀ´
 	EdgeHashtable.Insert(edge);
 	Edge*p,*q,*t;
 	Vertex*temp;
@@ -190,7 +192,7 @@ void Graphlnk::removeEdge(int v1, int v2)
 	if (EdgeHashtable.Remove(v1, v2))
 	{
 		NodeHashtable.Find(v1)->degree--;
-		//ä»å“ˆå¸Œè¡¨æ‰¾åˆ°è¾¹ï¼Œç„¶åæ‰¾åˆ°é‚»æ¥è¡¨çš„åŠæ¡è¾¹ï¼Œå†é€šè¿‡ä¼™ä¼´æŒ‡é’ˆåˆ é™¤å¦å¤–åŠæ¡è¾¹
+		//´Ó¹şÏ£±íÕÒµ½±ß£¬È»ºóÕÒµ½ÁÚ½Ó±íµÄ°ëÌõ±ß£¬ÔÙÍ¨¹ı»ï°éÖ¸ÕëÉ¾³ıÁíÍâ°ëÌõ±ß
 		Edge *p, *q, *t;
 		p = EdgeHashtable.Find(v1, v2);
 		q = p->lLink;
@@ -213,7 +215,7 @@ void Graphlnk::removeEdge(int v1, int v2)
 
 int Graphlnk::isEdge(const int u,const int v)
 {
-	//ç”¨å“ˆå¸Œè¡¨ç›´æ¥éå†è¾¹
+	//ÓÃ¹şÏ£±íÖ±½Ó±éÀú±ß
 	if (EdgeHashtable.Search(u, v))
 		return 1;
 	else return -1;
@@ -226,7 +228,7 @@ int Graphlnk::weight(const int u,const int v)
 	if(p!=nullptr)
 	return p->cost;
 	else return -1;
-	//ç”¨å“ˆå¸Œè¡¨éå†è¾¹
+	//ÓÃ¹şÏ£±í±éÀú±ß
 }
 
 void Graphlnk::sort_edge(bool cmp_(const Edge&, const Edge&))
@@ -267,7 +269,7 @@ bool comp(const Edge& a, const Edge& b)
 
 void Graphlnk::kruskal(int v)
 {
-	//å…‹é²æ–¯å¡ç®—æ³•
+	//¿ËÂ³Ë¹¿¨Ëã·¨
 	bool *vis = new bool[numVertices];
 	sort_edge(comp);
 	int result{ 0 };
@@ -283,8 +285,8 @@ void Graphlnk::kruskal(int v)
 	}
 
 	delete[] vis;
-	//æ¥ç€è°ƒç”¨è¾“å‡ºå‡½æ•°
-	//resultæ˜¯æœ€å°å€¼
+	//½Ó×Åµ÷ÓÃÊä³öº¯Êı
+	//resultÊÇ×îĞ¡Öµ
 
 }             
 
