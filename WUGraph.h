@@ -39,7 +39,7 @@ private:
 											   //VertexDblList NodeTable;
 	Vertex *real;
 	Vertex *first;
-	void print(int* dist, int* path, int u, int v);
+	void print(int* dist, int* path, int u, int v,int type);
 	string getvalue(int v);
 	int maxVertices;
 	int numEdges;

@@ -341,8 +341,6 @@ void Graphlnk::dijstra(string a, string b, int *path, int type)
 		for (k = 0; k < n; k++)
 		{
 			if (k == u)continue;
-			if (k == 88)
-				cout << ' ';
 			w = getWeight(u, k, type);//;两点之间的长度
 									  //更新有中间结点的最短路径
 			if (S[k] == false && w < 0xfffff && dist[u] + w < dist[k])
@@ -352,10 +350,10 @@ void Graphlnk::dijstra(string a, string b, int *path, int type)
 			}
 		}
 	}
-	print(dist, path, temp->number, t->number);
+	print(dist, path, temp->number, t->number,type);
 }
 
-void Graphlnk::print(int* dist, int* path, int u, int v)
+void Graphlnk::print(int* dist, int* path, int u, int v,int type)
 {
 	int i, j, k;
 	int n = numVertices;
@@ -367,12 +365,16 @@ void Graphlnk::print(int* dist, int* path, int u, int v)
 		d[k++] = j;
 		j = path[j];
 	}
-	cout << getvalue(u) << "        ";
-	if (k > 0)
+	d[k++] = u;
+	while (k > 1)
 	{
-		cout << getvalue(d[--k]) << " " << endl;
+		cout << getvalue(d[--k]) << "->";
 	}
-	cout << "最短路径长度/最少花费为：" << dist[v] << endl;
+	cout << getvalue(d[--k]) << endl<< endl;
+	if (type == 1)
+		cout << "最短路径长度为：" << dist[v] << endl<< endl;
+	else if (type == 2)
+		cout << "最少花费为：" << dist[v] << endl<< endl;
 
 	delete[] d;
 }
