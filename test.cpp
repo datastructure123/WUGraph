@@ -6,16 +6,23 @@ void main()
 {
 	char x;
 	char c;
+	string name;
+	Vertex* city = new Vertex;
 	string Start;
 	string End;
-	Graphlnk Railway(100000);
 
+	Graphlnk Railway(100000);
+	int* path = new int[10];
 	Railway.Initial();
 	while (1) {
-		cout << "================旅游导航系统系统=================" << endl
+		cout << "=================旅游导航系统系统==================" << endl
 			<< "==           1.旅游城市信息                      ==" << endl
 			<< "==           2.旅游路线规划                      ==" << endl
-			<< "==           3.退出界面                          ==" << endl;
+			<< "==           3.添加城市信息                      ==" << endl
+			<< "==           4.删除城市信息                      ==" << endl
+			<< "==           5.添加可达路径                      ==" << endl
+			<< "==           6.删除已有路径	                  ==" << endl
+			<< "==           7.退出界面                          ==" << endl;
 
 		cin >> x;
 		switch (x)
@@ -32,11 +39,31 @@ void main()
 			cin >> Start >> End;
 			system("cls");
 			cout << "=============旅游路线规划==============" << endl
-				<< "==           最短路径                ==" << endl
-				<< "==           最少花费                ==" << endl;
+				<< "==           最短路径:1                ==" << endl
+				<< "==           最少花费:0               ==" << endl;
+			int ans;
+			cin >> ans;
+			Railway.dijstra(Start, End, path, ans);
 			break;
 
-		case'3':exit(0); break;
+		case'3':
+			cout << "=============添加城市信息=============" << endl
+				<< "==      请输入城市名称以及编号      ==" << endl;
+			cin >> city->name >> city->code;
+			Railway.addVertex(city);
+			break;
+		case'4':
+			cout << "=============删除城市信息==============" << endl
+				<< "==       请输入删除城市的编号        ==" << endl;
+			cin >> name;
+			Railway.removeVertex(name);
+			break;
+		case'5':
+			cout << "=============添加可达路径==============" << endl
+				<< "==       请输入添加的路径信息        ==" << endl
+				<< "== 编号A 城市A 编号B 城市B 距离 花费 ==" << endl;
+			break;
+		case'7':exit(0); break;
 		}
 	}
 }

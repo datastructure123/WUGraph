@@ -1,6 +1,7 @@
 #pragma 
 #include<iostream>
 #include<fstream>
+#include<vector>
 #include"Vertex.h"
 #include"HashTable.h"
 
@@ -20,28 +21,27 @@ public:
 	int edgeCount();         //返回图中的边数
 	void getVertices();  //返回包含所有顶点的数组
 	void addVertex(Vertex *x);        //添加顶点
-	void removeVertex(int num);     //删除顶点
-	int isVertex(int num);          //判断该顶点是否在图中
-	int degree(int v);       //顶点的度
-	int getFirstNeighbor(int v);//返回第一个邻接顶点
-	int getNextNeighbor(int v1, int v2); //返回下一个邻接顶点
+	void removeVertex(string a);     //删除顶点
+	int isVertex(string a);          //判断该顶点是否在图中
+	int degree(string a);       //顶点的度
+	string getFirstNeighbor(string a);//返回第一个邻接顶点
+	string getNextNeighbor(string v1, string v2); //返回下一个邻接顶点
 	void addEdge(Edge* edge);        //添加边
-	void removeEdge(int v1, int v2);     //删除边
-	int isEdge(const int u, const int v);                        //判断是否为边
-	int weight(const int u, const int v);                        //求某边的权值
-	void kruskal(int v);                 //克鲁斯卡算法
+	void removeEdge(string v1, string v2);     //删除边
+	int isEdge(string u, string v);                        //判断是否为边
+	int weightcost(string u, string v);                        //求某边的权值
+	int weightdist(string u, string v);
+	int getWeight(int a, int b, int type);
+	void dijstra(string a, string b, int *path, int type);                 //克鲁斯卡算法
 private:
-	void sort_edge(bool cmp_(const Edge&, const Edge&));
-	//并查集所需
-	Edge *edg_sort;   //存储排好序的边
-	Verhash  NodeHashtable{MaxVertices, MaxVertices};////这里有很大的疑惑
-	Edghash  EdgeHashtable{MaxVertices,MaxVertices};////
-	//VertexDblList NodeTable;
+	Verhash  NodeHashtable{ 1000, MaxVertices };////这里有很大的疑惑
+	Edghash  EdgeHashtable{ 1000,MaxVertices };////
+											   //VertexDblList NodeTable;
 	Vertex *real;
 	Vertex *first;
+	void print(int* dist, int* path, int u, int v);
+	string getvalue(int v);
 	int maxVertices;
 	int numEdges;
 	int numVertices;
 };
-
-
