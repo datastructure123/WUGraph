@@ -6,10 +6,11 @@ void main()
 {
 	char x;
 	char c;
-	string name;
+	string name, nameA, nameB;
 	Vertex* city = new Vertex;
 	string Start;
 	string End;
+	Edge * way=new Edge;
 
 	Graphlnk Railway(100000);
 	int* path = new int[10];
@@ -39,8 +40,8 @@ void main()
 			cin >> Start >> End;
 			system("cls");
 			cout << "=============旅游路线规划==============" << endl
-				<< "==           最短路径:1                ==" << endl
-				<< "==           最少花费:0               ==" << endl;
+				<< "==           最短路径:1              ==" << endl
+				<< "==           最少花费:0              ==" << endl;
 			int ans;
 			cin >> ans;
 			Railway.dijstra(Start, End, path, ans);
@@ -54,7 +55,7 @@ void main()
 			break;
 		case'4':
 			cout << "=============删除城市信息==============" << endl
-				<< "==       请输入删除城市的编号        ==" << endl;
+				<< "==       请输入删除城市的名称        ==" << endl;
 			cin >> name;
 			Railway.removeVertex(name);
 			break;
@@ -62,6 +63,15 @@ void main()
 			cout << "=============添加可达路径==============" << endl
 				<< "==       请输入添加的路径信息        ==" << endl
 				<< "== 编号A 城市A 编号B 城市B 距离 花费 ==" << endl;
+			cin >> way->head >> way->h_name >> way->dest >> way->d_name >> way->dist >> way->cost;
+			Railway.addEdge(way);
+			break;
+		case'6':
+			cout << "=============删除可达路径==============" << endl
+				<< "==       请输入删除的路径信息        ==" << endl
+				<< "==    城市名A           城市名B      ==" << endl;
+			cin >> nameA >> nameB;
+			Railway.removeEdge(nameA, nameB);
 			break;
 		case'7':exit(0); break;
 		}

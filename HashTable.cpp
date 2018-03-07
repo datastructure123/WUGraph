@@ -82,7 +82,12 @@ VerNode* Verhash::FindPos(string a)
 }
 Vertex* Verhash::Find(string a)
 {
-	return (FindPos(a)->link->data);
+	VerNode *p= FindPos(a)->link;
+	if (p == nullptr)
+		return nullptr;
+	else
+		return p->data;
+
 }
 bool Verhash::Search(string a)
 {
@@ -105,6 +110,11 @@ bool Verhash::Insert(Vertex* vertex)
 		num *= -1;
 	p = FindPos(vertex->name);
 	q = p;
+	if (p->link!=nullptr&&p->link->data->name == vertex->name)
+	{
+		cout << "城市已存在\n";
+		return false;
+	}
 	while (p->link!=NULL)
 	{
 		p = p->link;
@@ -115,7 +125,7 @@ bool Verhash::Insert(Vertex* vertex)
 			p->link->data = vertex;
 			p->link->last = q;
 		}
-		else if (p != NULL && p->link != NULL)
+		/*else if (p != NULL && p->link != NULL)
 		{
 			return false;//已经存在插入失败
 		}
@@ -124,7 +134,7 @@ bool Verhash::Insert(Vertex* vertex)
 			p = new VerNode;
 			p->data = vertex;
 			p->link = q;
-		}
+		}*/
 
 	vertex->key = num % divisor;
 	return true;

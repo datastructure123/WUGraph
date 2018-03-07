@@ -39,6 +39,7 @@ void Graphlnk::Initial()
 	inE.close();
 	return;
 }
+
 int Graphlnk::vertexCount()
 {   
 	return numVertices;
@@ -119,7 +120,6 @@ void Graphlnk::removeVertex(string a)
 	//删除哈希表里的和双向链表里的
 }
 
-
 int Graphlnk::isVertex(string a)
 {
 	//从哈希表里遍历顶点
@@ -170,7 +170,7 @@ void Graphlnk::addEdge(Edge *edge)
 	//添加到哈希表，邻接表，把邻接表的对应位置链接起来
 	EdgeHashtable.Insert(edge);
 	Edge*p, *q, *t;
-	Vertex*temp;
+	Vertex*temp,*temp1;
 	if (edge->head == 0)
 		cout << "!" << endl;
 	int num1 = 0;
@@ -192,6 +192,17 @@ void Graphlnk::addEdge(Edge *edge)
 	if (num2 < 0)
 		num2 *= -1;
 	temp = NodeHashtable.Find(edge->h_name);
+	if (temp == nullptr)
+	{
+		cout << edge->h_name << "未查询到\n";
+		return;
+	}
+	temp1 = NodeHashtable.Find(edge->d_name);
+	if (temp1 == nullptr)
+	{
+		cout << edge->d_name << "未查询到\n";
+		return;
+	}
 	temp->degree++;
 	p = temp->adj;
 	if (p->lLink == NULL && p->rLink == NULL)
@@ -206,7 +217,7 @@ void Graphlnk::addEdge(Edge *edge)
 	*current = *edge;
 	current->head = edge->dest;
 	current->dest = edge->head;
-	temp = NodeHashtable.Find(edge->d_name);
+	temp = temp1;
 	temp->degree++;
 	p = temp->adj;
 	if (p->lLink == NULL && p->rLink == NULL)
@@ -312,6 +323,21 @@ void Graphlnk::dijstra(string a, string b, int *path, int type)
 	Vertex *temp, *t;
 	t = NodeHashtable.Find(b);
 	temp = NodeHashtable.Find(a);//a是起点
+	if (temp == nullptr&&t!=nullptr)
+	{
+		cout << "城市：" << a << "不存在于记录！\n";
+		return;
+	}
+	else if (temp != nullptr&&t == nullptr)
+	{
+		cout << "城市：" << a << "不存在于记录 \n";
+		return;
+	}
+	else if (temp == nullptr&&t == nullptr)
+	{
+		cout << "城市：" << a << "与城市：" << b << "均不存在于记录 \n";
+		return;
+	}
 	for (i = 0; i < n; i++)
 	{
 		dist[i] = 0xfffff;
@@ -360,6 +386,11 @@ void Graphlnk::print(int* dist, int* path, int u, int v,int type)
 	int *d = new int[n];
 	j = v;
 	k = 0;
+	if (path[v] == -1)
+	{
+		cout << "该城市不可达！\n\n";
+		return;
+	}
 	while (j != u)
 	{
 		d[k++] = j;
