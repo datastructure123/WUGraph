@@ -352,7 +352,7 @@ void Graphlnk::dijstra(string a, string b, int *path, int type)
 	}
 	else if (temp != nullptr&&t == nullptr)
 	{
-		cout << "城市：" << a << "不存在于记录 \n";
+		cout << "城市：" << b << "不存在于记录 \n";
 		return;
 	}
 	else if (temp == nullptr&&t == nullptr)

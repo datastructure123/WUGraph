@@ -30,16 +30,16 @@ public:
 	void removeEdge(string v1, string v2);     //删除边
 	int isEdge(string u, string v);                        //判断是否为边
 	int weightcost(string u, string v);                        //求某边的权值
-	int weightdist(string u, string v);
-	int getWeight(int a, int b, int type);
-	void dijstra(string a, string b, int *path, int type);                 //克鲁斯卡算法
+	int weightdist(string u, string v);                //获取距离
+	int getWeight(int a, int b, int type);             //获取距离值或花费值
+	void dijstra(string a, string b, int *path, int type);                 //迪杰斯特拉算法
 private:
 	Verhash  NodeHashtable{ 1000, MaxVertices };////这里有很大的疑惑
 	Edghash  EdgeHashtable{ 1000,MaxVertices };////
 											   //VertexDblList NodeTable;
 	Vertex *real;
 	Vertex *first;
-	void print(int* dist, int* path, int u, int v,int type);
+	void print(int* dist, int* path, int u, int v,int type);    //输出最短路径
 	string getvalue(int v);
 	int maxVertices;
 	int numEdges;
