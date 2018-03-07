@@ -173,68 +173,70 @@ string Graphlnk::getNextNeighbor(string v1, string v2)
 void Graphlnk::addEdge(Edge *edge)
 {
 	//添加到哈希表，邻接表，把邻接表的对应位置链接起来
-	EdgeHashtable.Insert(edge);
-	Edge*p, *q, *t;
-	Vertex*temp,*temp1;
-	if (edge->head == 0)
-		cout << "!" << endl;
-	int num1 = 0;
-	int num2 = 0;
-	string::iterator ptr1 = edge->h_name.begin();
-	for (int i = 0; ptr1 != edge->h_name.end(); i++)
+	if (EdgeHashtable.Insert(edge))
 	{
-		num1 += *ptr1;
-		ptr1++;
+		Edge*p, *q, *t;
+		Vertex*temp, *temp1;
+		if (edge->head == 0)
+			cout << "!" << endl;
+		int num1 = 0;
+		int num2 = 0;
+		string::iterator ptr1 = edge->h_name.begin();
+		for (int i = 0; ptr1 != edge->h_name.end(); i++)
+		{
+			num1 += *ptr1;
+			ptr1++;
+		}
+		if (num1 < 0)
+			num1 *= -1;
+		ptr1 = edge->d_name.begin();
+		for (int i = 0; ptr1 != edge->d_name.end(); i++)
+		{
+			num2 += *ptr1;
+			ptr1++;
+		}
+		if (num2 < 0)
+			num2 *= -1;
+		temp = NodeHashtable.Find(edge->h_name);
+		if (temp == nullptr)
+		{
+			cout << edge->h_name << "未查询到\n";
+			return;
+		}
+		temp1 = NodeHashtable.Find(edge->d_name);
+		if (temp1 == nullptr)
+		{
+			cout << edge->d_name << "未查询到\n";
+			return;
+		}
+		temp->degree++;
+		p = temp->adj;
+		if (p->lLink == NULL && p->rLink == NULL)
+			p->lLink = p->rLink = new Edge;
+		q = p->rLink;
+		p->rLink = edge;
+		edge->rLink = q;
+		edge->lLink = p;
+		q->lLink = edge;
+		//////////////////////////////////////////////////////////////////////////////////////////////
+		Edge*current = new Edge;
+		*current = *edge;
+		current->head = edge->dest;
+		current->dest = edge->head;
+		temp = temp1;
+		temp->degree++;
+		p = temp->adj;
+		if (p->lLink == NULL && p->rLink == NULL)
+			p->lLink = p->rLink = new Edge;
+		q = p->rLink;
+		p->rLink = current;
+		current->rLink = q;
+		current->lLink = p;
+		q->lLink = current;
+		/////////////////////////////////////////////////////////////////////////////////////////////
+		current->partner = edge;
+		edge->partner = edge;
 	}
-	if (num1 < 0)
-		num1 *= -1;
-	ptr1 = edge->d_name.begin();
-	for (int i = 0; ptr1 != edge->d_name.end(); i++)
-	{
-		num2 += *ptr1;
-		ptr1++;
-	}
-	if (num2 < 0)
-		num2 *= -1;
-	temp = NodeHashtable.Find(edge->h_name);
-	if (temp == nullptr)
-	{
-		cout << edge->h_name << "未查询到\n";
-		return;
-	}
-	temp1 = NodeHashtable.Find(edge->d_name);
-	if (temp1 == nullptr)
-	{
-		cout << edge->d_name << "未查询到\n";
-		return;
-	}
-	temp->degree++;
-	p = temp->adj;
-	if (p->lLink == NULL && p->rLink == NULL)
-		p->lLink = p->rLink = new Edge;
-	q = p->rLink;
-	p->rLink = edge;
-	edge->rLink = q;
-	edge->lLink = p;
-	q->lLink = edge;
-	//////////////////////////////////////////////////////////////////////////////////////////////
-	Edge*current = new Edge;
-	*current = *edge;
-	current->head = edge->dest;
-	current->dest = edge->head;
-	temp = temp1;
-	temp->degree++;
-	p = temp->adj;
-	if (p->lLink == NULL && p->rLink == NULL)
-		p->lLink = p->rLink = new Edge;
-	q = p->rLink;
-	p->rLink = current;
-	current->rLink = q;
-	current->lLink = p;
-	q->lLink = current;
-	/////////////////////////////////////////////////////////////////////////////////////////////
-	current->partner = edge;
-	edge->partner = edge;
 }
 
 void Graphlnk::removeEdge(string v1, string v2)

@@ -223,13 +223,22 @@ bool Edghash::Insert(Edge* edge)//这个head也是序号？我们这个题目中貌似不需要序号
 		num2 *= -1;
 	p = FindPos(edge->h_name, edge->d_name);
 	q = p;
+	if (p->link != nullptr//反过来也有可能
+		&& (p->link->data->h_name == edge->h_name
+			&&p->link->data->d_name == edge->d_name
+		|| p->link->data->h_name == edge->d_name
+			&&p->link->data->d_name == edge->h_name))
+	{
+		cout << "该路径已经存在\n";
+		return false;
+	}
 	if (p != NULL && p->link == NULL)
 	{
 		p->link = new EdgNode;
 		p->link->data = edge;
 		p->link->last = q;
 	}
-	else if (p != NULL && p->link != NULL)
+	/*else if (p != NULL && p->link != NULL)
 	{
 		return false;//已经存在插入失败
 	}
@@ -237,7 +246,7 @@ bool Edghash::Insert(Edge* edge)//这个head也是序号？我们这个题目中貌似不需要序号
 	{
 		p->data = edge;
 		p->link = q;
-	}
+	}*/
 	edge->key = (num1 + num2) % divisor;
 	return true;
 }
