@@ -91,6 +91,11 @@ void Graphlnk::removeVertex(string a)
 	Vertex*p, *t;
 	Edge *d;
 	t = p = NodeHashtable.Find(a);
+	if (p == nullptr)
+	{
+		cout << "城市：" << a << "不存在于记录中\n";
+		return;
+	}
 	if (p != nullptr)
 	{  
 		Edge *q = p->adj->rLink;
@@ -235,6 +240,21 @@ void Graphlnk::addEdge(Edge *edge)
 void Graphlnk::removeEdge(string v1, string v2)
 {   Edge *p, *q, *t;
     p = EdgeHashtable.Find(v1, v2);
+	if (NodeHashtable.Find(v1)==nullptr)
+	{
+		cout << "城市：" << v1 << "不存在\n";
+		return;
+	}
+	if (NodeHashtable.Find(v2) == nullptr)
+	{
+		cout << "城市：" << v2 << "不存在\n";
+		return;
+	}
+	if (p == nullptr)
+	{
+		cout << "该路径不存在\n" << endl;
+		return;
+	}
 	if (EdgeHashtable.Remove(v1, v2))
 	{
 		NodeHashtable.Find(v1)->degree--;
